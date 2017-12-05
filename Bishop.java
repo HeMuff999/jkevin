@@ -27,7 +27,24 @@ public class Bishop extends ChessPiece
             yVector = a[1];
             newXPos = myPosition.getX() + xVector;
             newYPos = myPosition.getY() + yVector;
-            lol(whereTo);
+            if(newXPos <8 && newXPos >0 && newYPos > 0 && newYPos < 8)
+            {
+                //add moves that are possible
+                if(whereTo[newXPos][newYPos].getPiece() == null)
+                {
+                    possibleMoves.add(new Point(newXPos,newYPos));
+
+                }
+                else if(whereTo[newXPos][newYPos].getPiece().darkSide !=  whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide)
+                {
+
+                    possibleMoves.add(new Point(newXPos,newYPos));
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         for(int[] a: RightDown)
@@ -36,7 +53,24 @@ public class Bishop extends ChessPiece
             yVector = a[1];
             newXPos = myPosition.getX() + xVector;
             newYPos = myPosition.getY() + yVector;
-            lol(whereTo);
+            if(newXPos <8 && newXPos >0 && newYPos > 0 && newYPos < 8)
+            {
+                //add moves that are possible
+                if(whereTo[newXPos][newYPos].getPiece() == null)
+                {
+                    possibleMoves.add(new Point(newXPos,newYPos));
+
+                }
+                else if(whereTo[newXPos][newYPos].getPiece().darkSide !=  whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide)
+                {
+
+                    possibleMoves.add(new Point(newXPos,newYPos));
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         for(int[] a: LeftUp)
@@ -45,7 +79,24 @@ public class Bishop extends ChessPiece
             yVector = a[1];
             newXPos = myPosition.getX() + xVector;
             newYPos = myPosition.getY() + yVector;
-            lol(whereTo);
+            if(newXPos <8 && newXPos >0 && newYPos > 0 && newYPos < 8)
+            {
+                //add moves that are possible
+                if(whereTo[newXPos][newYPos].getPiece() == null)
+                {
+                    possibleMoves.add(new Point(newXPos,newYPos));
+
+                }
+                else if(whereTo[newXPos][newYPos].getPiece().darkSide !=  whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide)
+                {
+
+                    possibleMoves.add(new Point(newXPos,newYPos));
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         for(int[] a: LeftDown)
@@ -54,40 +105,43 @@ public class Bishop extends ChessPiece
             yVector = a[1];
             newXPos = myPosition.getX() + xVector;
             newYPos = myPosition.getY() + yVector;
-            lol(whereTo);
+            if(newXPos <8 && newXPos >0 && newYPos > 0 && newYPos < 8)
+            {
+                //add moves that are possible
+                if(whereTo[newXPos][newYPos].getPiece() == null)
+                {
+                    possibleMoves.add(new Point(newXPos,newYPos));
+
+                }
+                else if(whereTo[newXPos][newYPos].getPiece().darkSide !=  whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide)
+                {
+
+                    possibleMoves.add(new Point(newXPos,newYPos));
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         return possibleMoves;
     }
 
-    public void lol(Point[][] whereTo)
+   /* public void lol(Point[][] whereTo)
     {
         int xVector = 0;
         int yVector = 0;
         int newXPos = 0;
         int newYPos = 0;
-        if(newXPos <8 && newXPos >0 && newYPos > 0 && newYPos < 8)
-        {
-            //add moves that are possible
-            if(whereTo[newXPos][newYPos].getPiece() == null)
-            {
-                possibleMoves.add(new Point(newXPos,newYPos));
-            }
-            else
-            {
-                if(whereTo[newXPos][newYPos].getPiece().darkSide !=  whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide)
-                {
-                    possibleMoves.add(new Point(newXPos,newYPos));
-                }
-            }
-        }
-    }
+
+    }*/
 
     public static void listOfMoves()
     {
         for(int x =0; x<8; x++)
         {
-            for(int y =7; y<0; y--)
+            for(int y =0; y<-8; y--)
             {
                 int[] RightUpDiag = {x,y};
                 RightUp.add(RightUpDiag);
@@ -103,18 +157,18 @@ public class Bishop extends ChessPiece
             }
         }
 
-        for(int x= 7; x<0; x--)
+        for(int x= 0; x<-8; x--)
         {
-            for(int y= 7; y<0; y--)
+            for(int y= 0; y<-8; y--)
             {
                 int[] LeftUpDiag = {x,y};
                 LeftUp.add(LeftUpDiag);
             }
         }
 
-        for(int x=7; x<0; x--)
+        for(int x=0; x<-8; x--)
         {
-            for(int y =0; y<7; y++)
+            for(int y =0; y<8; y++)
             {
                 int[] LeftDownDiag = {x,y};
                 LeftDown.add(LeftDownDiag);
