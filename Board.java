@@ -41,6 +41,8 @@ public class Board extends JFrame implements WindowListener,ActionListener
     ImageIcon black = new ImageIcon("black.png");
     ImageIcon white = new ImageIcon("white.png");
 
+    
+    ArrayList<Point> possibleMoves;
     //Point pointInfo = new Point();
     Pawn whitePawn1;
     Point[][]  spacesInfo;
@@ -114,6 +116,11 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
     }
 
+    public void startingPoints()
+    {
+        
+    }
+    
     public void setSpaces()
     {
 
@@ -128,7 +135,11 @@ public class Board extends JFrame implements WindowListener,ActionListener
             {
                 if(spaces[x][y].isSelected())
                 {                                    
-                    spacesInfo[x][y].getPiece().move(spacesInfo);
+                    possibleMoves = spacesInfo[x][y].getPiece().move(spacesInfo);
+                    for(Point z: possibleMoves)
+                    {
+                        
+                    }
                 }
                 spaces[x][y].setSelected(false);
             }
