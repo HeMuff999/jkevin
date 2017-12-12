@@ -41,6 +41,9 @@ public class Board extends JFrame implements WindowListener,ActionListener
     ImageIcon black = new ImageIcon("black.png");
     ImageIcon white = new ImageIcon("white.png");
 
+    //Point pointInfo = new Point();
+    Pawn whitePawn1;
+    Point[][]  spacesInfo;
     JToggleButton[][] spaces;
     Button newGame;
 
@@ -59,6 +62,8 @@ public class Board extends JFrame implements WindowListener,ActionListener
         Panel main = new Panel(new BorderLayout());
         Panel grid = new Panel(new GridLayout(8,8));
         spaces = new JToggleButton[8][8];
+        spacesInfo = new Point[8][8];
+        whitePawn1 = new Pawn(false, spacesInfo[0][1]);
         //setting colors;
         for(int x = 0; x < 8; x++)
         {
@@ -67,7 +72,6 @@ public class Board extends JFrame implements WindowListener,ActionListener
                 spaces[x][y] = new JToggleButton();
                 if(x!= 7 && x!= 6 && x!= 0 && x!= 1)
                 {
-                    
 
                     if(x%2 == y%2)
                     {//black squares
@@ -82,7 +86,6 @@ public class Board extends JFrame implements WindowListener,ActionListener
                     {
                         spaces[x][y].setIcon(white);
                     }
-                    
 
                 }
                 grid.add(spaces[x][y]);
@@ -111,12 +114,53 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
     }
 
+    public void setSpaces()
+    {
+
+    }
+
+    public void getPiece()
+    {
+        //detect the selected piece and get its info
+        for(int x = 0; x < 8; x++)
+        {
+            for(int y = 0; y < 8; y++)
+            {
+                if(spaces[x][y].isSelected())
+                {                                    
+                    spacesInfo[x][y].getPiece().move(spacesInfo);
+                }
+                spaces[x][y].setSelected(false);
+            }
+        }
+
+    }
+
+    public void takeInValidMoves()
+    {
+
+        //set the spaces that are possibleMoves to have a green dot in em
+        //  for (Point z : possibleMoves)
+        {
+
+        }
+    }
+
+    public void getPawn()
+    {
+
+    }
+
     public void     windowClosing(WindowEvent e)
     {
         System.exit(0);
     }
 
-    @Override public void actionPerformed(ActionEvent e){}
+    @Override public void actionPerformed(ActionEvent e){
+        getPiece();
+        takeInValidMoves();
+
+    }
 
     public void     windowActivated(WindowEvent e){}
 
