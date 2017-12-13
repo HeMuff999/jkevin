@@ -226,7 +226,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
     public void setPieces()
     {
-        
+
         for(int x = 0; x < 8; x++)
         {
             for(int y = 0; y < 8; y++)
@@ -235,7 +235,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
             }
         }
 
-        Pawn blackPawn0 = new Pawn(true, spacesInfo[0][1]);
+         Pawn blackPawn0 = new Pawn(true, spacesInfo[0][1]);
         Pawn blackPawn1 = new Pawn(true, spacesInfo[1][1]);
         Pawn blackPawn2 = new Pawn(true, spacesInfo[2][1]);
         Pawn blackPawn3 = new Pawn(true, spacesInfo[3][1]);
@@ -301,19 +301,19 @@ public class Board extends JFrame implements WindowListener,ActionListener
         spacesInfo[2][7] = new Point(3,7,whiteBishop1);
         spacesInfo[5][7] = new Point(5,7,whiteBishop2);
         
-        Queen blackQueen = new Queen(true, spacesInfo[3][0]);
-        Queen whiteQueen = new Queen(false, spacesInfo[3][7]);
+        Queen blackQueen = new Queen(true, spacesInfo[4][0]);
+        Queen whiteQueen = new Queen(false, spacesInfo[4][7]);
 
-        spacesInfo[3][0] = new Point(3,0,blackQueen);
-        spacesInfo[3][7] = new Point(3,7,whiteQueen);
+        spacesInfo[3][0] = new Point(4,0,blackQueen);
+        spacesInfo[3][7] = new Point(4,7,whiteQueen);
         
-        King blackKing = new King(true, spacesInfo[4][0]);
-        King whiteKing = new King(false, spacesInfo[4][7]);
+        King blackKing = new King(true, spacesInfo[3][0]);
+        King whiteKing = new King(false, spacesInfo[3][7]);
         
-        spacesInfo[4][0] = new Point(4,0,blackKing);
-        spacesInfo[4][7] = new Point(4,7,whiteKing);
+        spacesInfo[4][0] = new Point(3,0,blackKing);
+        spacesInfo[4][7] = new Point(3,7,whiteKing);
+
     }
-
     public void setSpaces()
     {
 
@@ -339,6 +339,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
                         originalY = y;
                         for(Point z: possibleMoves)
                         {
+                            System.out.println(spacesInfo[y][x].getPiece());
                             //black spaces
                             //System.out.println(z.getX() + "," +z.getY());
                             if(z.getX() %2 == z.getY()%2)
@@ -351,6 +352,22 @@ public class Board extends JFrame implements WindowListener,ActionListener
                             }
 
                         }
+                        for(int z = 0; z < 8; z++)
+                        {
+                            for(int a = 0; a < 8; a++)
+                            {
+                                if(spaces[z][a].getIcon() != possibleMoveBlack && spaces[z][a].getIcon() != possibleMoveWhite)
+                                {
+                                    spaces[z][a].setEnabled(false); 
+                                }
+                            }
+                        }
+                         alternate = true;
+                    }
+                    else
+                    {
+                        spaces[x][y].setSelected(false);
+                        getPiece();
                     }
                     if(spacesInfo[y][x].getPiece().toString().substring(0,5).equals("white"))
                     {
@@ -360,29 +377,19 @@ public class Board extends JFrame implements WindowListener,ActionListener
                     {
                         whoTurn = "white";
                     }
-                    
 
                     spaces[x][y].setSelected(false);
                 }
             }
         }    
-        for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 8; y++)
-            {
-                if(spaces[x][y].getIcon() != possibleMoveBlack && spaces[x][y].getIcon() != possibleMoveWhite)
-                {
-                    spaces[x][y].setEnabled(false); 
-                }
-            }
-        }
-        alternate = true;
+
+       
 
     }
 
     public void movePiece()
     {
-        
+
         for(int x = 0; x < 8; x++)
         {
             for(int y = 0; y < 8; y++)
@@ -433,7 +440,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
         if(originalPieceName.substring(0,5).equals("black"))
         {
             if(newX%2 == newY%2)
-            {//new space is black
+            {//black spaces with black pieces
                 if(originalPiece.pieceName.equals("pawn"))
                 {
                     spaces[newX][newY].setIcon(BpawnB);
@@ -441,12 +448,132 @@ public class Board extends JFrame implements WindowListener,ActionListener
                 }
                 if(originalPiece.pieceName.equals("rook"))
                 {
-
+                    spaces[newX][newY].setIcon(BrookB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("bishop"))
+                {
+                    spaces[newX][newY].setIcon(BbishopB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("queen"))
+                {
+                    spaces[newX][newY].setIcon(BqueenB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("king"))
+                {
+                    spaces[newX][newY].setIcon(BkingB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("knight"))
+                {
+                    spaces[newX][newY].setIcon(BknightB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+            }
+            else
+            {//black pieces on white squares
+                if(originalPiece.pieceName.equals("pawn"))
+                {
+                    spaces[newX][newY].setIcon(BpawnW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("rook"))
+                {
+                    spaces[newX][newY].setIcon(BrookW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("bishop"))
+                {
+                    spaces[newX][newY].setIcon(BbishopW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("queen"))
+                {
+                    spaces[newX][newY].setIcon(BqueenW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("king"))
+                {
+                    spaces[newX][newY].setIcon(BkingW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("knight"))
+                {
+                    spaces[newX][newY].setIcon(BknightW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
                 }
             }
         }
         else if(originalPieceName.substring(0,5).equals("white"))
         {
+            if(newX%2 == newY%2)
+            {//white spaces with black pieces
+                if(originalPiece.pieceName.equals("pawn"))
+                {
+                    spaces[newX][newY].setIcon(WpawnB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("rook"))
+                {
+                    spaces[newX][newY].setIcon(WrookB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("bishop"))
+                {
+                    spaces[newX][newY].setIcon(WbishopB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("queen"))
+                {
+                    spaces[newX][newY].setIcon(WqueenB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("king"))
+                {
+                    spaces[newX][newY].setIcon(WkingB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("knight"))
+                {
+                    spaces[newX][newY].setIcon(WknightB);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+            }
+            else
+            {//black pieces on white squares
+                if(originalPiece.pieceName.equals("pawn"))
+                {
+                    spaces[newX][newY].setIcon(WpawnW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("rook"))
+                {
+                    spaces[newX][newY].setIcon(WrookW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("bishop"))
+                {
+                    spaces[newX][newY].setIcon(WbishopW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("queen"))
+                {
+                    spaces[newX][newY].setIcon(WqueenW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("king"))
+                {
+                    spaces[newX][newY].setIcon(WkingW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+                if(originalPiece.pieceName.equals("knight"))
+                {
+                    spaces[newX][newY].setIcon(WknightW);
+                    clearOriginalSpace(x,y,newX,newY,originalPiece);
+                }
+            }
 
         }
     }
@@ -465,10 +592,8 @@ public class Board extends JFrame implements WindowListener,ActionListener
         //set old space to be null, new = original piece
         spacesInfo[y][x] = new Point(y,x,null);
         spacesInfo[newY][newX] = new Point(newY,newX,piece);  
-        
 
     }
-
     public void getPawn()
     {
 
@@ -490,21 +615,13 @@ public class Board extends JFrame implements WindowListener,ActionListener
         {
             movePiece();
 
-            
         }
-
     }
-
     public void     windowActivated(WindowEvent e){}
-
     public void     windowDeactivated(WindowEvent e){}
-
     public void     windowDeiconified(WindowEvent e){}
-
     public void     windowIconified(WindowEvent e){}
-
     public void     windowOpened(WindowEvent e){}
-
     public void     windowClosed(WindowEvent e){
     }
 }
