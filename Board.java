@@ -226,7 +226,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
     public void setPieces()
     {
-
+        
         for(int x = 0; x < 8; x++)
         {
             for(int y = 0; y < 8; y++)
@@ -262,20 +262,56 @@ public class Board extends JFrame implements WindowListener,ActionListener
         Pawn whitePawn6 = new Pawn(false, spacesInfo[6][6]);
         Pawn whitePawn7 = new Pawn(false, spacesInfo[7][6]); 
 
-        spacesInfo[0][6] = new Point(0,1,whitePawn0);
-        spacesInfo[1][6] = new Point(1,1,whitePawn1);
-        spacesInfo[2][6] = new Point(2,1,whitePawn2);
-        spacesInfo[3][6] = new Point(3,1,whitePawn3);
-        spacesInfo[4][6] = new Point(4,1,whitePawn4);
-        spacesInfo[5][6] = new Point(5,1,whitePawn5);
-        spacesInfo[6][6] = new Point(6,1,whitePawn6);
-        spacesInfo[7][6] = new Point(7,1,whitePawn7);
+        spacesInfo[0][6] = new Point(0,6,whitePawn0);
+        spacesInfo[1][6] = new Point(1,6,whitePawn1);
+        spacesInfo[2][6] = new Point(2,6,whitePawn2);
+        spacesInfo[3][6] = new Point(3,6,whitePawn3);
+        spacesInfo[4][6] = new Point(4,6,whitePawn4);
+        spacesInfo[5][6] = new Point(5,6,whitePawn5);
+        spacesInfo[6][6] = new Point(6,6,whitePawn6);
+        spacesInfo[7][6] = new Point(7,6,whitePawn7);
 
-        //if(spacesInfo[x][y].getPiece.equals("pawn"))
-        {
-            //    Pawn dummy = new Pawn(
-        }
+        Rook blackRook1 = new Rook(true, spacesInfo[0][0]);
+        Rook blackRook2 = new Rook(true, spacesInfo[7][0]);
+        Rook whiteRook1 = new Rook(false, spacesInfo[0][7]);
+        Rook whiteRook2 = new Rook(false, spacesInfo[7][7]);
+        
+        spacesInfo[0][0] = new Point(0,0,blackRook1);
+        spacesInfo[7][0] = new Point(7,0,blackRook2);
+        spacesInfo[0][7] = new Point(0,7,whiteRook1);
+        spacesInfo[7][7] = new Point(7,7,whiteRook2);
+        
+        Knight blackKnight1 = new Knight(true, spacesInfo[1][0]);
+        Knight blackKnight2 = new Knight(true, spacesInfo[6][0]);
+        Knight whiteKnight1 = new Knight(false, spacesInfo[1][7]);
+        Knight whiteKnight2 = new Knight(false, spacesInfo[6][7]);
+        
+        spacesInfo[1][0] = new Point(0,0,blackKnight1);
+        spacesInfo[6][0] = new Point(6,0,blackKnight2);
+        spacesInfo[1][7] = new Point(1,7,whiteKnight1);
+        spacesInfo[6][7] = new Point(6,7,whiteKnight2);
+        
+        Bishop blackBishop1 = new Bishop(true, spacesInfo[2][0]);
+        Bishop blackBishop2 = new Bishop(true, spacesInfo[5][0]);
+        Bishop whiteBishop1 = new Bishop(false, spacesInfo[2][7]);
+        Bishop whiteBishop2 = new Bishop(false, spacesInfo[5][7]);
+        
+        spacesInfo[2][0] = new Point(3,0,blackBishop1);
+        spacesInfo[5][0] = new Point(5,0,blackBishop2);
+        spacesInfo[2][7] = new Point(3,7,whiteBishop1);
+        spacesInfo[5][7] = new Point(5,7,whiteBishop2);
+        
+        Queen blackQueen = new Queen(true, spacesInfo[3][0]);
+        Queen whiteQueen = new Queen(false, spacesInfo[3][7]);
 
+        spacesInfo[3][0] = new Point(3,0,blackQueen);
+        spacesInfo[3][7] = new Point(3,7,whiteQueen);
+        
+        King blackKing = new King(true, spacesInfo[4][0]);
+        King whiteKing = new King(false, spacesInfo[4][7]);
+        
+        spacesInfo[4][0] = new Point(4,0,blackKing);
+        spacesInfo[4][7] = new Point(4,7,whiteKing);
     }
 
     public void setSpaces()
