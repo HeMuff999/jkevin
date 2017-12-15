@@ -305,14 +305,14 @@ public class Board extends JFrame implements WindowListener,ActionListener
         Queen blackQueen = new Queen(true, spacesInfo[4][0]);
         Queen whiteQueen = new Queen(false, spacesInfo[4][7]);
 
-        spacesInfo[3][0] = new Point(4,0,blackQueen);
-        spacesInfo[3][7] = new Point(4,7,whiteQueen);
+        spacesInfo[4][0] = new Point(4,0,blackQueen);
+        spacesInfo[4][7] = new Point(4,7,whiteQueen);
 
         King blackKing = new King(true, spacesInfo[3][0]);
         King whiteKing = new King(false, spacesInfo[3][7]);
 
-        spacesInfo[4][0] = new Point(3,0,blackKing);
-        spacesInfo[4][7] = new Point(3,7,whiteKing);
+        spacesInfo[3][0] = new Point(3,0,blackKing);
+        spacesInfo[3][7] = new Point(3,7,whiteKing);
 
     }
 
@@ -469,6 +469,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
         if(originalPieceName.substring(0,5).equals("black"))
         {
+            
             if(newX%2 == newY%2)
             {//black spaces with black pieces
                 if(originalPiece.pieceName.equals("pawn"))
@@ -619,39 +620,42 @@ public class Board extends JFrame implements WindowListener,ActionListener
         if(originalPiece != null)
         {
             // System.out.println(originalPiece);
-            originalPieceName = spacesInfo[y][x].getPiece().toString();
+            
+            originalPieceName = spacesInfo[x][y].getPiece().toString();
             if(originalPieceName.substring(0,5).equals("black"))
             {
+                
                 if(newX%2 == newY%2)
                 {//black spaces with black pieces
+                    System.out.println("testxd");
                     if(originalPiece.pieceName.equals("Pawn"))
                     {
-                        spaces[newX][newY].setIcon(BpawnB);
+                        spaces[newY][newX].setIcon(BpawnB);
 
                     }
                     if(originalPiece.pieceName.equals("rook"))
                     {
-                        spaces[newX][newY].setIcon(BrookB);
+                        spaces[newY][newX].setIcon(BrookB);
 
                     }
                     if(originalPiece.pieceName.equals("bishop"))
                     {
-                        spaces[newX][newY].setIcon(BbishopB);
+                        spaces[newY][newX].setIcon(BbishopB);
 
                     }
                     if(originalPiece.pieceName.equals("queen"))
                     {
-                        spaces[newX][newY].setIcon(BqueenB);
+                        spaces[newY][newX].setIcon(BqueenB);
 
                     }
                     if(originalPiece.pieceName.equals("king"))
                     {
-                        spaces[newX][newY].setIcon(BkingB);
+                        spaces[newY][newX].setIcon(BkingB);
 
                     }
                     if(originalPiece.pieceName.equals("knight"))
                     {
-                        spaces[newX][newY].setIcon(BknightB);
+                        spaces[newY][newX].setIcon(BknightB);
 
                     }
 
@@ -660,32 +664,32 @@ public class Board extends JFrame implements WindowListener,ActionListener
                 {//black pieces on white squares
                     if(originalPiece.pieceName.equals("pawn"))
                     {
-                        spaces[newX][newY].setIcon(BpawnW);
+                        spaces[newY][newX].setIcon(BpawnW);
 
                     }
                     if(originalPiece.pieceName.equals("rook"))
                     {
-                        spaces[newX][newY].setIcon(BrookW);
+                        spaces[newY][newX].setIcon(BrookW);
 
                     }
                     if(originalPiece.pieceName.equals("bishop"))
                     {
-                        spaces[newX][newY].setIcon(BbishopW);
+                        spaces[newY][newX].setIcon(BbishopW);
 
                     }
                     if(originalPiece.pieceName.equals("queen"))
                     {
-                        spaces[newX][newY].setIcon(BqueenW);
+                        spaces[newY][newX].setIcon(BqueenW);
 
                     }
                     if(originalPiece.pieceName.equals("king"))
                     {
-                        spaces[newX][newY].setIcon(BkingW);
+                        spaces[newY][newX].setIcon(BkingW);
 
                     }
                     if(originalPiece.pieceName.equals("knight"))
                     {
-                        spaces[newX][newY].setIcon(BknightW);
+                        spaces[newY][newX].setIcon(BknightW);
 
                     }
 
@@ -697,32 +701,32 @@ public class Board extends JFrame implements WindowListener,ActionListener
                 {//white spaces with black pieces
                     if(originalPiece.pieceName.equals("pawn"))
                     {
-                        spaces[newX][newY].setIcon(WpawnB);
+                        spaces[newY][newX].setIcon(WpawnB);
 
                     }
                     if(originalPiece.pieceName.equals("rook"))
                     {
-                        spaces[newX][newY].setIcon(WrookB);
+                        spaces[newY][newX].setIcon(WrookB);
 
                     }
                     if(originalPiece.pieceName.equals("bishop"))
                     {
-                        spaces[newX][newY].setIcon(WbishopB);
+                        spaces[newY][newX].setIcon(WbishopB);
 
                     }
                     if(originalPiece.pieceName.equals("queen"))
                     {
-                        spaces[newX][newY].setIcon(WqueenB);
+                        spaces[newY][newX].setIcon(WqueenB);
 
                     }
                     if(originalPiece.pieceName.equals("king"))
                     {
-                        spaces[newX][newY].setIcon(WkingB);
+                        spaces[newY][newX].setIcon(WkingB);
 
                     }
                     if(originalPiece.pieceName.equals("knight"))
                     {
-                        spaces[newX][newY].setIcon(WknightB);
+                        spaces[newY][newX].setIcon(WknightB);
 
                     }
 
@@ -731,32 +735,32 @@ public class Board extends JFrame implements WindowListener,ActionListener
                 {//black pieces on white squares
                     if(originalPiece.pieceName.equals("pawn"))
                     {
-                        spaces[newX][newY].setIcon(WpawnW);
+                        spaces[newY][newX].setIcon(WpawnW);
 
                     }
                     if(originalPiece.pieceName.equals("rook"))
                     {
-                        spaces[newX][newY].setIcon(WrookW);
+                        spaces[newY][newX].setIcon(WrookW);
 
                     }
                     if(originalPiece.pieceName.equals("bishop"))
                     {
-                        spaces[newX][newY].setIcon(WbishopW);
+                        spaces[newY][newX].setIcon(WbishopW);
 
                     }
                     if(originalPiece.pieceName.equals("queen"))
                     {
-                        spaces[newX][newY].setIcon(WqueenW);
+                        spaces[newY][newX].setIcon(WqueenW);
 
                     }
                     if(originalPiece.pieceName.equals("king"))
                     {
-                        spaces[newX][newY].setIcon(WkingW);
+                        spaces[newY][newX].setIcon(WkingW);
 
                     }
                     if(originalPiece.pieceName.equals("knight"))
                     {
-                        spaces[newX][newY].setIcon(WknightW);
+                        spaces[newY][newX].setIcon(WknightW);
 
                     }
 
@@ -770,7 +774,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
             if(newX%2 != newY %2)
             {
                 spaces[newY][newX].setIcon(white);
-                System.out.println("testW");
+                //System.out.println("testW");
             }
             else
             {
