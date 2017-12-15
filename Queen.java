@@ -4,7 +4,7 @@ public class Queen extends ChessPiece
     public Queen(boolean side, Point p)
     {
         setSide(side);
-        setName("Queen");
+        setName("queen");
         setPosition(p);
     }
 
@@ -90,98 +90,93 @@ public class Queen extends ChessPiece
         }
 
         //right down
-        for(int x = myPosition.getX(); x<=7; x++)
+        int y = myPosition.getY()+1;
+        for(int x = myPosition.getX()+1; x<=7 &&y<=7; x++, y++)
         {
-            for(int y = myPosition.getY(); y<=7; y++)
-            {
-                if(whereTo[myPosition.getX()][myPosition.getY()].getPiece() != null)
+                if(whereTo[x][y].getPiece() != null)
                 {
-                    if(whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide == darkSide)
+                    if(whereTo[x][y].getPiece().darkSide == darkSide)
                     {
                         break;
                     }
                     else
                     {
-                        possibleMoves.add(new Point(myPosition.getX(), myPosition.getY()));
+                        possibleMoves.add(new Point(x, y));
                         break;
                     }
                 }
                 else
                 {
-                    possibleMoves.add(new Point(myPosition.getX(), myPosition.getY()));
+                    possibleMoves.add(new Point(x, y));
                 }
-            }
         }
-
+        y = myPosition.getY()-1;
         //right up
-        for(int x = myPosition.getX(); x<=7; x++)
+        for(int x = myPosition.getX()+1; x<=7&&y >= 0; x++,y--)
         {
-            for(int y = myPosition.getY(); y>=0; y--)
+
+            if(whereTo[x][y].getPiece() != null)
             {
-                if(whereTo[myPosition.getX()][myPosition.getY()].getPiece() != null)
+                if(whereTo[x][y].getPiece().darkSide == darkSide)
                 {
-                    if(whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide == darkSide)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        possibleMoves.add(new Point(myPosition.getX(), myPosition.getY()));
-                        break;
-                    }
+                    break;
                 }
                 else
                 {
-                    possibleMoves.add(new Point(myPosition.getX(), myPosition.getY()));
+                    possibleMoves.add(new Point(x, y));
+                    break;
                 }
             }
-        }
-
-        //left down
-        for(int x = myPosition.getX(); x>=0; x--)
-        {
-            for(int y = myPosition.getY(); y<=7; y++)
+            else
             {
-                if(whereTo[myPosition.getX()][myPosition.getY()].getPiece() != null)
+                possibleMoves.add(new Point(x, y));
+            }
+
+        }
+        y = myPosition.getY() +1;
+            //left down
+        for(int x = myPosition.getX()-1; x>=0 && y <= 7; x--,y++)
+        {
+
+            if(whereTo[x][y].getPiece() != null)
+            {
+                if(whereTo[x][y].getPiece().darkSide == darkSide)
                 {
-                    if(whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide == darkSide)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        possibleMoves.add(new Point(myPosition.getX(), myPosition.getY()));
-                        break;
-                    }
+                    break;
                 }
                 else
                 {
-                    possibleMoves.add(new Point(myPosition.getX(), myPosition.getY()));
+                    possibleMoves.add(new Point(x, y));
+                    break;
                 }
             }
-        }
+            else
+            {
+                possibleMoves.add(new Point(x,y));
+            }
 
+        }
+        y = myPosition.getY()-1;
         //left up
-        for(int x = myPosition.getX(); x>=0; x--)
+        for(int x = myPosition.getX()-1; x>=0 && y<=7; x--,y--)
         {
-            for(int y = myPosition.getY(); y<=7; y++)
+
+            if(whereTo[x][y].getPiece() != null)
             {
-                if(whereTo[myPosition.getX()][myPosition.getY()].getPiece() != null)
+                if(whereTo[x][y].getPiece().darkSide == darkSide)
                 {
-                    if(whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide == darkSide)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        possibleMoves.add(new Point(myPosition.getX(), myPosition.getY()));
-                        break;
-                    }
+                    break;
                 }
                 else
                 {
-                    possibleMoves.add(new Point(myPosition.getX(), myPosition.getY()));
+                    possibleMoves.add(new Point(x, y));
+                    break;
                 }
+            }
+            else
+            {
+                possibleMoves.add(new Point(x, y));
+
             }
         }
         return possibleMoves;
