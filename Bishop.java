@@ -1,10 +1,7 @@
 import java.util.ArrayList;
 public class Bishop extends ChessPiece
 {
-    static ArrayList<int[]> RightUp = new ArrayList<int[]>();
-    static ArrayList<int[]> RightDown = new ArrayList<int[]>();
-    static ArrayList<int[]> LeftUp = new ArrayList<int[]>();
-    static ArrayList<int[]> LeftDown = new ArrayList<int[]>();
+    
     public Bishop(boolean side, Point p)
     {
         setSide(side);
@@ -14,165 +11,97 @@ public class Bishop extends ChessPiece
 
     public ArrayList<Point> move(Point[][] whereTo)
     {
-        listOfMoves();
-        possibleMoves.clear();
-        int xVector = 0;
-        int yVector = 0;
-        int newXPos = 0;
-        int newYPos = 0;
-
-        for(int[] a: RightUp)
+        //right down
+        int y = myPosition.getY()+1;
+        for(int x = myPosition.getX()+1; x<=7 &&y<=7; x++, y++)
         {
-            xVector = a[0];
-            yVector = a[1];
-            newXPos = myPosition.getX() + xVector;
-            newYPos = myPosition.getY() + yVector;
-            if(newXPos <8 && newXPos >0 && newYPos > 0 && newYPos < 8)
+            if(whereTo[x][y].getPiece() != null)
             {
-                //add moves that are possible
-                if(whereTo[newXPos][newYPos].getPiece() == null)
-                {
-                    possibleMoves.add(new Point(newXPos,newYPos));
-
-                }
-                else if(whereTo[newXPos][newYPos].getPiece().darkSide !=  whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide)
-                {
-
-                    possibleMoves.add(new Point(newXPos,newYPos));
-                }
-                else
+                if(whereTo[x][y].getPiece().darkSide == darkSide)
                 {
                     break;
                 }
-            }
-        }
-
-        for(int[] a: RightDown)
-        {
-            xVector = a[0];
-            yVector = a[1];
-            newXPos = myPosition.getX() + xVector;
-            newYPos = myPosition.getY() + yVector;
-            if(newXPos <8 && newXPos >0 && newYPos > 0 && newYPos < 8)
-            {
-                //add moves that are possible
-                if(whereTo[newXPos][newYPos].getPiece() == null)
-                {
-                    possibleMoves.add(new Point(newXPos,newYPos));
-
-                }
-                else if(whereTo[newXPos][newYPos].getPiece().darkSide !=  whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide)
-                {
-
-                    possibleMoves.add(new Point(newXPos,newYPos));
-                }
                 else
                 {
+                    possibleMoves.add(new Point(x, y));
                     break;
                 }
             }
-        }
-
-        for(int[] a: LeftUp)
-        {
-            xVector = a[0];
-            yVector = a[1];
-            newXPos = myPosition.getX() + xVector;
-            newYPos = myPosition.getY() + yVector;
-            if(newXPos <8 && newXPos >0 && newYPos > 0 && newYPos < 8)
+            else
             {
-                //add moves that are possible
-                if(whereTo[newXPos][newYPos].getPiece() == null)
-                {
-                    possibleMoves.add(new Point(newXPos,newYPos));
+                possibleMoves.add(new Point(x, y));
+            }
+        }
+        y = myPosition.getY()-1;
+        //right up
+        for(int x = myPosition.getX()+1; x<=7&&y >= 0; x++,y--)
+        {
 
-                }
-                else if(whereTo[newXPos][newYPos].getPiece().darkSide !=  whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide)
-                {
-
-                    possibleMoves.add(new Point(newXPos,newYPos));
-                }
-                else
+            if(whereTo[x][y].getPiece() != null)
+            {
+                if(whereTo[x][y].getPiece().darkSide == darkSide)
                 {
                     break;
                 }
-            }
-        }
-
-        for(int[] a: LeftDown)
-        {
-            xVector = a[0];
-            yVector = a[1];
-            newXPos = myPosition.getX() + xVector;
-            newYPos = myPosition.getY() + yVector;
-            if(newXPos <8 && newXPos >0 && newYPos > 0 && newYPos < 8)
-            {
-                //add moves that are possible
-                if(whereTo[newXPos][newYPos].getPiece() == null)
-                {
-                    possibleMoves.add(new Point(newXPos,newYPos));
-
-                }
-                else if(whereTo[newXPos][newYPos].getPiece().darkSide !=  whereTo[myPosition.getX()][myPosition.getY()].getPiece().darkSide)
-                {
-
-                    possibleMoves.add(new Point(newXPos,newYPos));
-                }
                 else
                 {
+                    possibleMoves.add(new Point(x, y));
                     break;
                 }
             }
-        }
+            else
+            {
+                possibleMoves.add(new Point(x, y));
+            }
 
+        }
+        y = myPosition.getY() +1;
+        //left down
+        for(int x = myPosition.getX()-1; x>=0 && y <= 7; x--,y++)
+        {
+
+            if(whereTo[x][y].getPiece() != null)
+            {
+                if(whereTo[x][y].getPiece().darkSide == darkSide)
+                {
+                    break;
+                }
+                else
+                {
+                    possibleMoves.add(new Point(x, y));
+                    break;
+                }
+            }
+            else
+            {
+                possibleMoves.add(new Point(x,y));
+            }
+
+        }
+        y = myPosition.getY()-1;
+        //left up
+        for(int x = myPosition.getX()-1; x>=0 && y>=0; x--,y--)
+        {
+
+            if(whereTo[x][y].getPiece() != null)
+            {
+                if(whereTo[x][y].getPiece().darkSide == darkSide)
+                {
+                    break;
+                }
+                else
+                {
+                    possibleMoves.add(new Point(x, y));
+                    break;
+                }
+            }
+            else
+            {
+                possibleMoves.add(new Point(x, y));
+
+            }
+        }
         return possibleMoves;
-    }
-
-   /* public void lol(Point[][] whereTo)
-    {
-        int xVector = 0;
-        int yVector = 0;
-        int newXPos = 0;
-        int newYPos = 0;
-
-    }*/
-
-    public static void listOfMoves()
-    {
-        for(int x =0; x<8; x++)
-        {
-            for(int y =0; y<-8; y--)
-            {
-                int[] RightUpDiag = {x,y};
-                RightUp.add(RightUpDiag);
-            }
-        }
-
-        for(int x= 0; x<8; x++)
-        {
-            for(int y=0; y<8; y++)
-            {
-                int[] RightDownDiag = {x,y};
-                RightDown.add(RightDownDiag);
-            }
-        }
-
-        for(int x= 0; x<-8; x--)
-        {
-            for(int y= 0; y<-8; y--)
-            {
-                int[] LeftUpDiag = {x,y};
-                LeftUp.add(LeftUpDiag);
-            }
-        }
-
-        for(int x=0; x<-8; x--)
-        {
-            for(int y =0; y<8; y++)
-            {
-                int[] LeftDownDiag = {x,y};
-                LeftDown.add(LeftDownDiag);
-            }
-        }
-    }
+        
+   }
 }
