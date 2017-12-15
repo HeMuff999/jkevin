@@ -341,9 +341,18 @@ public class Board extends JFrame implements WindowListener,ActionListener
                             possibleMoves = spacesInfo[y][x].getPiece().move(spacesInfo);
                             originalX = x;
                             originalY = y;
+                            System.out.println(spacesInfo[y][x].getPiece());
+                            if(spacesInfo[y][x].getPiece().toString().substring(0,5).equals("white"))
+                            {
+                                whoTurn = "black";
+                            }
+                            else if(spacesInfo[y][x].getPiece().toString().substring(0,5).equals("black"))
+                            {
+                                whoTurn = "white";
+                            }
                             for(Point z: possibleMoves)
                             {
-                                System.out.println(spacesInfo[y][x].getPiece());
+
                                 //black spaces
                                 //System.out.println(z.getX() + "," +z.getY());
                                 if(z.getX() %2 == z.getY()%2)
@@ -363,18 +372,10 @@ public class Board extends JFrame implements WindowListener,ActionListener
                             spaces[x][y].setSelected(false);
                             getPiece();
                         }
-                        if(spacesInfo[y][x].getPiece().toString().substring(0,5).equals("white"))
-                        {
-                            whoTurn = "black";
-                        }
-                        else if(spacesInfo[y][x].getPiece().toString().substring(0,5).equals("black"))
-                        {
-                            whoTurn = "white";
-                        }
 
                        
                     }
-                     spaces[x][y].setSelected(false);
+                    spaces[x][y].setSelected(false);
                 }
             }
         }   
@@ -469,7 +470,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
         if(originalPieceName.substring(0,5).equals("black"))
         {
-            
+
             if(newX%2 == newY%2)
             {//black spaces with black pieces
                 if(originalPiece.pieceName.equals("pawn"))
@@ -620,11 +621,11 @@ public class Board extends JFrame implements WindowListener,ActionListener
         if(originalPiece != null)
         {
             // System.out.println(originalPiece);
-            
+
             originalPieceName = spacesInfo[x][y].getPiece().toString();
             if(originalPieceName.substring(0,5).equals("black"))
             {
-                
+
                 if(newX%2 == newY%2)
                 {//black spaces with black pieces
                     System.out.println("testxd");
@@ -785,6 +786,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
         }
     }
+
     public void clearOriginalSpace(int x, int y,int newX, int newY, ChessPiece piece)
     {
         //clear original picture and set the spacesInfo
