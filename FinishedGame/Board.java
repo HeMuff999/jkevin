@@ -47,6 +47,8 @@ public class Board extends JFrame implements WindowListener,ActionListener
     int originalX;
     int originalY;
 
+    boolean gameover = false;
+
     ArrayList<Point> possibleMoves;
     //Point pointInfo = new Point();
     String whoTurn;
@@ -54,8 +56,10 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
     Point[][]  spacesInfo;
     JToggleButton[][] spaces;
-    Button newGame;
+    JButton newGame;
+    JButton turnColor;
 
+    Panel north;
     int counter = 0;
     public static void main (String []args)
     {
@@ -203,8 +207,20 @@ public class Board extends JFrame implements WindowListener,ActionListener
                 grid.add(spaces[x][y]);
             }
         }
-        newGame = new Button("New Game");
-        main.add(newGame,BorderLayout.NORTH);
+        Panel north = new Panel(new BorderLayout());
+
+        newGame = new JButton("New Game");
+        north.add(newGame,BorderLayout.CENTER);
+         turnColor = new JButton();
+        turnColor.setIcon(new ImageIcon("whiteLOL.png"));
+        //turnColor.setEnabled(false);
+        turnColor.setText("WHITE'S TURN");
+
+        north.setPreferredSize(new Dimension(800,20));
+
+        north.add(turnColor,BorderLayout.EAST);
+
+        main.add(north,BorderLayout.NORTH);
 
         newGame.addActionListener(new ActionListener(){
                 @Override
@@ -345,10 +361,12 @@ public class Board extends JFrame implements WindowListener,ActionListener
                             if(spacesInfo[y][x].getPiece().toString().substring(0,5).equals("white"))
                             {
                                 whoTurn = "black";
+
                             }
                             else if(spacesInfo[y][x].getPiece().toString().substring(0,5).equals("black"))
                             {
                                 whoTurn = "white";
+
                             }
                             for(Point z: possibleMoves)
                             {
@@ -373,7 +391,6 @@ public class Board extends JFrame implements WindowListener,ActionListener
                             getPiece();
                         }
 
-                       
                     }
                     spaces[x][y].setSelected(false);
                 }
@@ -397,10 +414,18 @@ public class Board extends JFrame implements WindowListener,ActionListener
             if(whoTurn.equals("white"))
             {
                 whoTurn = "black";
+                turnColor.setIcon(new ImageIcon("blackLOL.png"));
+                //turnColor.setEnabled(false);
+                turnColor.setText("BLACK'S TURN");            
+
             }
             else
             {
                 whoTurn = "white";
+
+                turnColor.setIcon(new ImageIcon("whiteLOL.png"));
+                //turnColor.setEnabled(false);
+                turnColor.setText("WHITE'S TURN");
             }
 
         }
@@ -418,6 +443,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
             }
             alternate = true;
         }
+
         counter = 0;
 
     }
@@ -457,6 +483,19 @@ public class Board extends JFrame implements WindowListener,ActionListener
                 }
 
             }
+        }
+        if(whoTurn.equals("black"))
+        {
+            turnColor.setIcon(new ImageIcon("blackLOL.png"));
+
+            turnColor.setText("BLACK'S TURN");            
+
+        }
+        else
+        {
+
+            turnColor.setIcon(new ImageIcon("whiteLOL.png"));
+            turnColor.setText("WHITE'S TURN");
         }
 
     }
@@ -817,16 +856,43 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
     @Override public void actionPerformed(ActionEvent e){
         //if alt = true, then its time to move the piece
-        if(!alternate)
+        if(!alternate && !gameover)
         {
             getPiece();
 
         }
-        else
+        else if(!gameover && alternate)
         {
             movePiece();
-
+            gameover();
         }
+    }
+
+    public void changeColor()
+    {
+
+    }
+
+    public void gameover()
+    {
+        int asdf = 0;
+        for(int x = 0; x < 8; x++)
+        {
+            for( int y = 0; y < 8; y++)
+            { 
+                if(spaces[x][y].getIcon() == BkingW || spaces[x][y].getIcon() == BkingB|| spaces[x][y].getIcon() == WkingW || spaces[x][y].getIcon() == WkingB)
+                {
+                    asdf++;
+
+                }
+            }
+        }
+        if(asdf != 2)
+        {
+            gameover = true;
+            newGame.setText("Game over, new game?");
+        }
+        asdf = 0;
     }
 
     public void     windowActivated(WindowEvent e){}
@@ -842,4 +908,3 @@ public class Board extends JFrame implements WindowListener,ActionListener
     public void     windowClosed(WindowEvent e){
     }
 }
-    
