@@ -211,7 +211,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
         newGame = new JButton("New Game");
         north.add(newGame,BorderLayout.CENTER);
-         turnColor = new JButton();
+        turnColor = new JButton();
         turnColor.setIcon(new ImageIcon("whiteLOL.png"));
         //turnColor.setEnabled(false);
         turnColor.setText("WHITE'S TURN");
@@ -303,7 +303,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
         Knight whiteKnight1 = new Knight(false, spacesInfo[1][7]);
         Knight whiteKnight2 = new Knight(false, spacesInfo[6][7]);
 
-        spacesInfo[1][0] = new Point(0,0,blackKnight1);
+        spacesInfo[1][0] = new Point(1,0,blackKnight1);
         spacesInfo[6][0] = new Point(6,0,blackKnight2);
         spacesInfo[1][7] = new Point(1,7,whiteKnight1);
         spacesInfo[6][7] = new Point(6,7,whiteKnight2);
@@ -348,6 +348,7 @@ public class Board extends JFrame implements WindowListener,ActionListener
 
                 if(spaces[x][y].isSelected())
                 {
+                    System.out.println(spacesInfo[y][x].getPiece());
                     if(spacesInfo[y][x].getPiece() != null)
                     {
                         if(whoTurn.equals(spacesInfo[y][x].getPiece().toString().substring(0,5)))
@@ -414,18 +415,12 @@ public class Board extends JFrame implements WindowListener,ActionListener
             if(whoTurn.equals("white"))
             {
                 whoTurn = "black";
-                turnColor.setIcon(new ImageIcon("blackLOL.png"));
-                //turnColor.setEnabled(false);
-                turnColor.setText("BLACK'S TURN");            
 
             }
             else
             {
                 whoTurn = "white";
 
-                turnColor.setIcon(new ImageIcon("whiteLOL.png"));
-                //turnColor.setEnabled(false);
-                turnColor.setText("WHITE'S TURN");
             }
 
         }
@@ -461,6 +456,19 @@ public class Board extends JFrame implements WindowListener,ActionListener
                     {
                         //get the original point's information
                         setPieceImage(originalX, originalY, x,y);
+                        if(whoTurn.equals("black") &&alternate)
+                        {
+                            turnColor.setIcon(new ImageIcon("blackLOL.png"));
+
+                            turnColor.setText("BLACK'S TURN");            
+
+                        }
+                        else if(alternate && whoTurn.equals("white"))
+                        {
+
+                            turnColor.setIcon(new ImageIcon("whiteLOL.png"));
+                            turnColor.setText("WHITE'S TURN");
+                        }
                         alternate = false;
                         //System.out.println("test");
 
@@ -479,23 +487,11 @@ public class Board extends JFrame implements WindowListener,ActionListener
                 if(spaces[x][y].getIcon() == possibleMoveBlack || spaces[x][y].getIcon() == possibleMoveWhite)
                 {                    
                     restoreImages(y,x);    
-                    //System.out.println("test2");                               
+                    //System.out.println("test2");      
+
                 }
 
             }
-        }
-        if(whoTurn.equals("black"))
-        {
-            turnColor.setIcon(new ImageIcon("blackLOL.png"));
-
-            turnColor.setText("BLACK'S TURN");            
-
-        }
-        else
-        {
-
-            turnColor.setIcon(new ImageIcon("whiteLOL.png"));
-            turnColor.setText("WHITE'S TURN");
         }
 
     }
